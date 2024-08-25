@@ -1,6 +1,8 @@
 
-import { TextInput, View, StyleSheet } from "react-native";
+import { TextInput, View, StyleSheet, Alert } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
+import { useState } from "react";
+import babelConfig from "../babel.config";
 
 
 /**
@@ -12,7 +14,28 @@ import PrimaryButton from "../components/PrimaryButton";
  * @component
  */
 const StartGameScreen: React.FC = () => {
+    const [enteredValue, setEnteredValue] = useState('');
 
+    function numberInputHandler(inputText: string) {
+        setEnteredValue(inputText.replace(/[^0-9]/g, ''));
+    }
+
+    function resetInputHandler() {
+        setEnteredValue('');
+    }
+
+    function confirmInputHandler() {
+        const chosenNumber = parseInt(enteredValue);
+        if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
+            // show alert...
+            Alert.alert('Invalid number!', 
+                'Number has to be a number between 1 and 99.', 
+                [{ text: 'OK', style: 'destructive', onPress: resetInputHandler }]
+            );
+            return;
+        }
+        console.log('Valida number!');
+    }
 
     return (
         <>
@@ -20,14 +43,17 @@ const StartGameScreen: React.FC = () => {
                 <TextInput style={styles.input}
                     maxLength={2}
                     keyboardType="number-pad"
-                    autoCapitalize="none" 
-                    autoCorrect={false}/>
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    value={enteredValue}
+                    onChangeText={numberInputHandler}
+                />
                 <View style={styles.buttonsContainer}>
                     <View style={styles.buttonContainer}>
-                        <PrimaryButton label="Reset" />
+                        <PrimaryButton label="Reset" onPress={resetInputHandler} />
                     </View>
                     <View style={styles.buttonContainer}>
-                        <PrimaryButton label="Confirm" />
+                        <PrimaryButton label="Confirm" onPress={confirmInputHandler} />
                     </View>
                 </View>
             </View>

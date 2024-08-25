@@ -4,13 +4,13 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 
 export interface PrimaryButtonProps {
     label: string;
+    onPress?: () => void;
 };
 
 const PrimaryButton : React.FC<PrimaryButtonProps> = (props: PrimaryButtonProps) => {
 
-
     function onPressHandler() {
-        console.log('Button pressed!');
+        props.onPress && props.onPress();
     }
 
     return (
