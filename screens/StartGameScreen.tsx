@@ -5,6 +5,10 @@ import { useState } from "react";
 import babelConfig from "../babel.config";
 
 
+export interface StartGameScreenProps {
+    onPickNumber: (selectedNumber: number) => void;
+}
+
 /**
  * StartGameScreen component.
  * 
@@ -13,7 +17,7 @@ import babelConfig from "../babel.config";
  * 
  * @component
  */
-const StartGameScreen: React.FC = () => {
+const StartGameScreen: React.FC<StartGameScreenProps> = (props: StartGameScreenProps) => {
     const [enteredValue, setEnteredValue] = useState('');
 
     function numberInputHandler(inputText: string) {
@@ -35,6 +39,7 @@ const StartGameScreen: React.FC = () => {
             return;
         }
         console.log('Valida number!');
+        props.onPickNumber(chosenNumber);
     }
 
     return (
