@@ -2,8 +2,9 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import Colors from "../../utils/colors";
 
 export interface PrimaryButtonProps {
-    label: string;
+    label?: string;
     onPress?: () => void;
+    children?: React.ReactNode;
 };
 
 const PrimaryButton : React.FC<PrimaryButtonProps> = (props: PrimaryButtonProps) => {
@@ -21,7 +22,8 @@ const PrimaryButton : React.FC<PrimaryButtonProps> = (props: PrimaryButtonProps)
                 }}
                 onPress={onPressHandler} 
                 android_ripple={{color: Colors.primary600}}>
-                <Text style={styles.buttonText}>{props.label}</Text>
+                {props.label && <Text style={styles.buttonText}>{props.label}</Text>}
+                {!props.label && props.children}
             </Pressable>
         </View>
         </>

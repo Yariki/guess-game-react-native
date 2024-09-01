@@ -5,6 +5,7 @@ import { NumberContainer } from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import { Card } from "../components/ui/Card";
 import { InstructionText } from "../components/ui/InstructionText";
+import {Ionicons} from '@expo/vector-icons'
 
 export interface GameScreenProps {
     userChoice: number;
@@ -61,10 +62,23 @@ const GameScreen :  React.FC<GameScreenProps> = ({userChoice, onGameOver}: GameS
             <InstructionText>Opponent's Guess</InstructionText>
             <NumberContainer number={currentGuess}/>
             <Card>
-                <Text>Higher or lower?</Text> 
-                <View>
-                    <PrimaryButton label="+" onPress={() => nextGuessHandler('higher')}></PrimaryButton>
-                    <PrimaryButton label="-" onPress={() => nextGuessHandler('lower')}></PrimaryButton>
+                <InstructionText style={styles.instructionTextStyle}>Higher or lower?</InstructionText> 
+                <View style={styles.buttonsContainer}>
+                    <View style={styles.buttonContainer}>
+                        <PrimaryButton onPress={() => nextGuessHandler('higher')}>
+                            {/* <View style={styles.iconStyle}> */}
+                                <Ionicons name="add" size={24} color="white" />
+                            {/* </View> */}
+                        </PrimaryButton>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <PrimaryButton onPress={() => nextGuessHandler('lower')}>
+                            {/* <View style={styles.iconStyle}> */}
+                                <Ionicons name="remove" size={24} color="white"/>
+                            {/* </View> */}
+                        </PrimaryButton>
+                    </View>
+                    
                 </View>
            </Card>
             {/* <View>LOG Rounds</View> */}
@@ -79,6 +93,20 @@ const styles = StyleSheet.create({
      screen: {
         flex: 1,
         padding: 24
-
+     },
+     buttonsContainer: {
+        flexDirection: 'row',
+     },
+     buttonContainer:{
+        flex: 1,
+     },
+     instructionTextStyle: {
+        marginBottom: 16,
+     },
+     iconStyle: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
      }
+
 });

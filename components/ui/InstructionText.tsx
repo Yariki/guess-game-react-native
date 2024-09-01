@@ -3,12 +3,13 @@ import Colors from '../../utils/colors';
 
 
 export interface InstructionTextProps {
+    style?: any;
     children?: React.ReactNode;
 }
 
-export const InstructionText = ({children}: InstructionTextProps) => {
+export const InstructionText = ({style, children}: InstructionTextProps) => {
     return (
-        <Text style={styles.instructionsText}>{children}</Text>
+        <Text style={[styles.instructionsText, style]}>{children}</Text>
     );
 }
 
