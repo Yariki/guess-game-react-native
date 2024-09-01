@@ -1,9 +1,10 @@
 
 import { View, Text , StyleSheet, Alert} from "react-native";
-import Title from "../components/ui/Title";
 import { useState,  useEffect } from "react";
 import { NumberContainer } from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
+import { Card } from "../components/ui/Card";
+import { InstructionText } from "../components/ui/InstructionText";
 
 export interface GameScreenProps {
     userChoice: number;
@@ -57,15 +58,15 @@ const GameScreen :  React.FC<GameScreenProps> = ({userChoice, onGameOver}: GameS
 
     return (
         <View style={styles.screen}>
-            <Title title="Opponent's Guess"/>
+            <InstructionText>Opponent's Guess</InstructionText>
             <NumberContainer number={currentGuess}/>
-            <View>
+            <Card>
                 <Text>Higher or lower?</Text> 
                 <View>
                     <PrimaryButton label="+" onPress={() => nextGuessHandler('higher')}></PrimaryButton>
                     <PrimaryButton label="-" onPress={() => nextGuessHandler('lower')}></PrimaryButton>
                 </View>
-           </View>
+           </Card>
             {/* <View>LOG Rounds</View> */}
         </View>
     );
