@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
-import Colors from "../utils/colors";
+import Colors from "../../utils/colors";
 
 export interface PrimaryButtonProps {
     label: string;

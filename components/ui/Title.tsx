@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import Colors from '../utils/colors';
+import Colors from '../../utils/colors';
 
 
 export interface TitleProps {
@@ -19,10 +19,10 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         fontWeight: 'bold',
-        color: Colors.accent500,
+        color: 'white',
         textAlign: 'center',
         borderWidth: 2,
-        borderColor: Colors.accent500,
+        borderColor: 'white',
         padding: 12,
      }
 });
