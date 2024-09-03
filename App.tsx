@@ -5,11 +5,22 @@ import { useState } from 'react';
 import GameScreen from './screens/GameScreen';
 import { GameOverScreen } from './screens/GameOverScreen';
 import Colors from './utils/colors';
+import {useFonts}  from 'expo-font'
+import AppLoading from 'expo-app-loading';``
 
 export default function App() {
 
   const [userNumber, setUserNumber] = useState<number | null>(null);
   const [gameIsOver, setGameIsOver] = useState<boolean>(true);
+
+  const [fontsLoaded] = useFonts({
+    'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
+    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf')
+  });
+
+  if(!fontsLoaded){
+    return <AppLoading />;
+  }
 
   function pickedNumberHandler(selectedNumber: number) {
     setUserNumber(selectedNumber);

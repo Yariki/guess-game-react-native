@@ -1,7 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import Colors from '../../utils/colors';
-
 
 export interface TitleProps {
     title?: string;
@@ -17,6 +15,7 @@ export default Title;
 
 const styles = StyleSheet.create({
     title: {
+        fontFamily: 'open-sans-bold',
         fontSize: 24,
         fontWeight: 'bold',
         color: 'white',
