@@ -1,11 +1,12 @@
 
-import { View, Text , StyleSheet, Alert} from "react-native";
+import { View, Text , StyleSheet, Alert, FlatList} from "react-native";
 import { useState,  useEffect } from "react";
 import { NumberContainer } from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import { Card } from "../components/ui/Card";
 import { InstructionText } from "../components/ui/InstructionText";
 import {Ionicons} from '@expo/vector-icons'
+import { GuessLogItem } from "../components/game/GueeLogItem";
 
 export interface GameScreenProps {
     userChoice: number;
@@ -29,7 +30,9 @@ let maxBoundary = 100;
 
 const GameScreen :  React.FC<GameScreenProps> = ({userChoice, onGameOver}: GameScreenProps) => {
 
-    const [currentGuess, setCurrentGuess] = useState(generateRandomBetween(1, 100, userChoice));
+    const initialGuess = generateRandomBetween(1, 100, userChoice);
+    const [currentGuess, setCurrentGuess] = useState(initialGuess);
+    const [guessRounds, setGuessRounds] = useState([initialGuess]);
 
     useEffect(() => {
         if(currentGuess === userChoice) {
@@ -60,7 +63,10 @@ const GameScreen :  React.FC<GameScreenProps> = ({userChoice, onGameOver}: GameS
         }
         const newRndNumber = generateRandomBetween(minBoudary, maxBoundary, currentGuess);
         setCurrentGuess(newRndNumber);
+        setGuessRounds((currentRounds) => [newRndNumber, ...currentRounds]);
     }
+
+    const guessRoundsLength = guessRounds.length;
 
     return (
         <View style={styles.screen}>
@@ -86,7 +92,13 @@ const GameScreen :  React.FC<GameScreenProps> = ({userChoice, onGameOver}: GameS
                     
                 </View>
            </Card>
-            {/* <View>LOG Rounds</View> */}
+            <View>
+                <FlatList 
+                    data={guessRounds} 
+                    renderItem={(itemData) => <GuessLogItem guess={itemData.item} roundNumber={guessRoundsLength - itemData.index}></GuessLogItem>} 
+                    keyExtractor={(item) => item.toString()}
+                />
+            </View>
         </View>
     );
 }
