@@ -5,10 +5,19 @@ import PrimaryButton from "../components/ui/PrimaryButton";
 
 
 export interface GameOverScreenProps {
-
+    roundsNumber?: number;
+    userNumber?: number;
+    onRestart?: () => void;
 }
 
-export const GameOverScreen = ({}: GameOverScreenProps) => {
+export const GameOverScreen = ({roundsNumber, userNumber, onRestart}: GameOverScreenProps) => {
+
+    const restartHandler = () => {
+        if(!onRestart) {
+            return;
+        }
+        onRestart();
+    };
 
     return <>
         <View  style={styles.rootContainer}>
@@ -19,8 +28,8 @@ export const GameOverScreen = ({}: GameOverScreenProps) => {
                     source={require('../assets/success.png')} 
                     alt="Success"></Image>
             </View>
-            <Text style={styles.summaryText}>Your phone needed <Text style={styles.highlight}>X</Text> rounds to guess the number <Text style={styles.highlight}>Y</Text>.</Text>
-            <PrimaryButton onPress={() => {}} label="Start New Game"></PrimaryButton>
+            <Text style={styles.summaryText}>Your phone needed <Text style={styles.highlight}>{roundsNumber}</Text> rounds to guess the number <Text style={styles.highlight}>{userNumber}</Text>.</Text>
+            <PrimaryButton onPress={restartHandler} label="Start New Game"></PrimaryButton>
         </View>
     </>;
 }
