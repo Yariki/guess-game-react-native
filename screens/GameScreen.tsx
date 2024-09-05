@@ -36,7 +36,7 @@ const GameScreen :  React.FC<GameScreenProps> = ({userChoice, onGameOver}: GameS
 
     useEffect(() => {
         if(currentGuess === userChoice) {
-            onGameOver();
+            onGameOver(guessRounds !== null ? guessRounds.length : 0);
         }
     }, [currentGuess, userChoice, onGameOver]);
 
@@ -92,7 +92,7 @@ const GameScreen :  React.FC<GameScreenProps> = ({userChoice, onGameOver}: GameS
                     
                 </View>
            </Card>
-            <View>
+            <View style={styles.listContainer}>
                 <FlatList 
                     data={guessRounds} 
                     renderItem={(itemData) => <GuessLogItem guess={itemData.item} roundNumber={guessRoundsLength - itemData.index}></GuessLogItem>} 
@@ -124,6 +124,10 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
+     },
+     listContainer: {
+        flex: 1,
+        padding: 16
      }
 
 });
