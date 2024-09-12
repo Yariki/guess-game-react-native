@@ -7,6 +7,7 @@ import { Card } from "../components/ui/Card";
 import { InstructionText } from "../components/ui/InstructionText";
 import {Ionicons} from '@expo/vector-icons'
 import { GuessLogItem } from "../components/game/GueeLogItem";
+import Title from "../components/ui/Title";
 
 export interface GameScreenProps {
     userChoice: number;
@@ -70,10 +71,10 @@ const GameScreen :  React.FC<GameScreenProps> = ({userChoice, onGameOver}: GameS
 
     return (
         <View style={styles.screen}>
-            <InstructionText>Opponent's Guess</InstructionText>
+            <Title title="Opponent's Guess"></Title>
             <NumberContainer number={currentGuess}/>
             <Card>
-                <InstructionText style={styles.instructionTextStyle}>Higher or lower?</InstructionText> 
+                <InstructionText style={styles.instructionTextStyle}>Higher or lower?</InstructionText>
                 <View style={styles.buttonsContainer}>
                     <View style={styles.buttonContainer}>
                         <PrimaryButton onPress={() => nextGuessHandler('higher')}>
@@ -109,7 +110,8 @@ export default GameScreen;
 const styles = StyleSheet.create({
      screen: {
         flex: 1,
-        padding: 24
+        padding: 24,
+        alignItems: 'center'
      },
      buttonsContainer: {
         flexDirection: 'row',

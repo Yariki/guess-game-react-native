@@ -1,5 +1,5 @@
 
-import { TextInput, View, StyleSheet, Alert, Text } from "react-native";
+import { TextInput, View, StyleSheet, Alert, Text, useWindowDimensions } from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import { useState } from "react";
 import babelConfig from "../babel.config";
@@ -24,6 +24,8 @@ export interface StartGameScreenProps {
 const StartGameScreen: React.FC<StartGameScreenProps> = (props: StartGameScreenProps) => {
     const [enteredValue, setEnteredValue] = useState('');
 
+    const {width, height} = useWindowDimensions();
+
     function numberInputHandler(inputText: string) {
         setEnteredValue(inputText.replace(/[^0-9]/g, ''));
     }
@@ -46,9 +48,11 @@ const StartGameScreen: React.FC<StartGameScreenProps> = (props: StartGameScreenP
         props.onPickNumber(chosenNumber);
     }
 
+    const marginTopDistance = height < 380 ? 30 : 100;
+
     return (
         <>
-            <View style={styles.rootContainer}>
+            <View style={[styles.rootContainer, {marginTop: marginTopDistance}]}>
                 <Title title="Gues My Number"></Title>
             
                 <Card>
@@ -77,6 +81,7 @@ const StartGameScreen: React.FC<StartGameScreenProps> = (props: StartGameScreenP
 
 export default StartGameScreen;
 
+//const deviceHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
     rootContainer: {
