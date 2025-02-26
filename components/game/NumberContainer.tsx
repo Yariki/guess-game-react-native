@@ -17,7 +17,7 @@ export const NumberContainer = ({number, children}: NumberContainerProps) => {
     </>);
 }
 
- const deviceWidth = Dimensions.get('window').width;
+const deviceWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
     container: {
